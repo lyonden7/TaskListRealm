@@ -6,18 +6,19 @@
 //
 
 import Foundation
+import RealmSwift
 
 // Модель списка задач
-final class TaskList {
-    var name = ""
-    var date = Date()
-    var tasks: [Task] = []
+final class TaskList: Object {
+    @Persisted var name = ""
+    @Persisted var date = Date()
+    @Persisted var tasks = List<Task>()
 }
 
 // Модель задачи
-final class Task {
-    var name = ""
-    var note = ""
-    var date = Date()
-    var isComplete = false
+final class Task: Object {
+    @Persisted var name = ""
+    @Persisted var note = ""
+    @Persisted var date = Date()
+    @Persisted var isComplete = false
 }

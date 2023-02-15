@@ -16,11 +16,11 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <segmentedControl key="tableHeaderView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" id="i5b-gF-IzX">
-                            <rect key="frame" x="0.0" y="0.0" width="320" height="31"/>
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="32"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <segments>
-                                <segment title="First"/>
-                                <segment title="Second"/>
+                                <segment title="Date"/>
+                                <segment title="A-Z"/>
                             </segments>
                             <connections>
                                 <action selector="sortingList:" destination="aD6-3E-EjL" eventType="valueChanged" id="15t-Ob-O7J"/>
@@ -28,7 +28,7 @@
                         </segmentedControl>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="TaskListCell" textLabel="bwe-pG-DH4" detailTextLabel="EXT-l0-8zk" style="IBUITableViewCellStyleValue1" id="iEq-K8-pgr">
-                                <rect key="frame" x="0.0" y="81" width="320" height="43.5"/>
+                                <rect key="frame" x="0.0" y="82" width="320" height="43.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="iEq-K8-pgr" id="Fys-De-dIc">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
@@ -51,7 +51,7 @@
                                     </subviews>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <segue destination="xVG-RN-Tla" kind="show" trigger="accessoryAction" id="Knf-vE-cgR"/>
+                                    <segue destination="xVG-RN-Tla" kind="show" id="tya-re-5UY"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>

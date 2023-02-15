@@ -6,17 +6,25 @@
 //
 
 import UIKit
+import RealmSwift
 
 /// Контроллер, в котором отображаются списки задач
 final class TaskListsViewController: UITableViewController {
 
     // MARK: - Public Properties
-    var taskLists: [TaskList] = []
+    var taskLists: Results<TaskList>!
     
     // MARK: - Life Cycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavigationBar()
+        createTempData()
+        taskLists = StorageManager.shared.realm.objects(TaskList.self)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tableView.reloadData()
     }
 
     // MARK: - Table view data source
@@ -56,7 +64,7 @@ final class TaskListsViewController: UITableViewController {
         }
         
         editAction.backgroundColor = .orange
-        doneAction.backgroundColor = .green
+        doneAction.backgroundColor = .systemGreen
         
         return UISwipeActionsConfiguration(actions: [doneAction, editAction, deleteAction])
     }
@@ -91,6 +99,12 @@ extension TaskListsViewController {
         navigationItem.leftBarButtonItem = editButtonItem
     }
     
+    private func createTempData() {
+        DataManager.shared.createTempData { [unowned self] in
+            tableView.reloadData()
+        }
+    }
+    
     private func showAlert(with taskList: TaskList? = nil, completion: (() -> Void)? = nil) {
         let title = taskList != nil ? "Edit List" : "New List"
         let alert = UIAlertController.createAlert(withTitle: title, andMessage: "Please set title for new task list")
@@ -108,6 +122,9 @@ extension TaskListsViewController {
     }
     
     private func save(taskList: String) {
-        
+        StorageManager.shared.save(taskList) { taskList in
+            let rowIndex = IndexPath(row: taskLists.index(of: taskList) ?? 0, section: 0)
+            tableView.insertRows(at: [rowIndex], with: .automatic)
+        }
     }
 }
