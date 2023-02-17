@@ -12,6 +12,7 @@ import RealmSwift
 final class TaskListsViewController: UITableViewController {
 	
 	// MARK: - Public Properties
+	/// Списки задач
 	var taskLists: Results<TaskList>!
 	
 	// MARK: - Life Cycle Methods
@@ -33,12 +34,8 @@ final class TaskListsViewController: UITableViewController {
 	}
 	
 	override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		let cell = tableView.dequeueReusableCell(withIdentifier: "TaskListCell", for: indexPath)
-		var content = cell.defaultContentConfiguration()
-		let taskList = taskLists[indexPath.row]
-		content.text = taskList.name
-		content.secondaryText = "\(taskList.tasks.count)"
-		cell.contentConfiguration = content
+		let cell = tableView.dequeueReusableCell(withIdentifier: "TaskListCell", for: indexPath) as! TaskListViewCell
+		cell.configure(taskLists[indexPath.row])
 		return cell
 	}
 	
@@ -78,7 +75,11 @@ final class TaskListsViewController: UITableViewController {
 	}
 	
 	@IBAction func sortingList(_ sender: UISegmentedControl) {
+		taskLists = sender.selectedSegmentIndex == 0
+		? taskLists.sorted(byKeyPath: "date")
+		: taskLists.sorted(byKeyPath: "name")
 		
+		tableView.reloadData()
 	}
 	
 	@objc

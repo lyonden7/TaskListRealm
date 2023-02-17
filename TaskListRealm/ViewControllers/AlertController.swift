@@ -9,10 +9,12 @@ import UIKit
 
 extension UIAlertController {
 	
+	/// Метод для создания UIAlertController
 	static func createAlert(withTitle title: String, andMessage message: String) -> UIAlertController {
 		UIAlertController(title: title, message: message, preferredStyle: .alert)
 	}
 	
+	/// Метод для создания UIAlertAction для UIAlertController для экрана со списками задач
 	func action(with taskList: TaskList?, completion: @escaping (String) -> Void) {
 		let doneButton = taskList == nil ? "Save" : "Update"
 		
@@ -33,6 +35,7 @@ extension UIAlertController {
 		}
 	}
 	
+	/// Метод для создания UIAlertAction для UIAlertController для экрана с задачами
 	func action(with task: Task?, completion: @escaping (String, String) -> Void) {
 		let title = task == nil ? "Save" : "Update"
 		

@@ -8,14 +8,14 @@
 import Foundation
 import RealmSwift
 
-// Модель списка задач
+/// Модель списка задач
 final class TaskList: Object {
 	@Persisted var name = ""
 	@Persisted var date = Date()
 	@Persisted var tasks = List<Task>()
 }
 
-// Модель задачи
+/// Модель задачи
 final class Task: Object {
 	@Persisted var name = ""
 	@Persisted var note = ""

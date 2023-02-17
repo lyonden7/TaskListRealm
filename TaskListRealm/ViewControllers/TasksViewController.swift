@@ -66,14 +66,15 @@ final class TasksViewController: UITableViewController {
 			isDone(true)
 		}
 		
-		
-		// не работает doneAction. По идее по нажатию на кнопку Done он должен удалять из currentTasks и добавлять в completedTasks
-		
-		
-		
-		let doneAction = UIContextualAction(style: .normal, title: "Done") { _, _, isDone in
-			StorageManager.shared.done(task)
-			tableView.reloadRows(at: [indexPath], with: .automatic)
+		let doneTitle = indexPath.section == 0 ? "Done" : "Undone"
+		let doneAction = UIContextualAction(style: .normal, title: doneTitle) { [unowned self] _, _, isDone in
+			let isComplete = indexPath.section == 0 ? true : false
+			StorageManager.shared.done(task, isComplete: isComplete) {
+				let currentTaskIndex = IndexPath(row: currentTasks.index(of: task) ?? 0, section: 0)
+				let completeTaskIndex = IndexPath(row: completedTasks.index(of: task) ?? 0, section: 1)
+				let indexReplace = indexPath.section == 0 ? completeTaskIndex : currentTaskIndex
+				tableView.moveRow(at: indexPath, to: indexReplace)
+			}
 			isDone(true)
 		}
 		

@@ -8,6 +8,7 @@
 import Foundation
 import RealmSwift
 
+/// StorageManager (Singleton) для работы с БД
 final class StorageManager {
 	static let shared = StorageManager()
 	
@@ -80,10 +81,11 @@ final class StorageManager {
 	}
 	
 	/// Метод, позволяющий отметить задачу выполненной
-	func done(_ task: Task) {
-		//		write {
-		//			task.setValue(true, forKey: "isComplete")
-		//		}
+	func done(_ task: Task, isComplete: Bool, completion: () -> Void) {
+		write {
+			task.setValue(isComplete, forKey: "isComplete")
+			completion()
+		}
 	}
 	
 	// MARK: - Private Methods

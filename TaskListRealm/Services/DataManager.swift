@@ -7,6 +7,7 @@
 
 import Foundation
 
+/// DataManager (Singleton) для создания начальных (временных) данных
 final class DataManager {
 	static let shared = DataManager()
 	
