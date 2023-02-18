@@ -80,11 +80,10 @@ final class StorageManager {
 		}
 	}
 	
-	/// Метод, позволяющий отметить задачу выполненной
-	func done(_ task: Task, isComplete: Bool, completion: () -> Void) {
+	/// Метод, позволяющий отметить задачу выполненной или наоборот
+	func done(_ task: Task) {
 		write {
-			task.setValue(isComplete, forKey: "isComplete")
-			completion()
+			task.isComplete.toggle()
 		}
 	}
 	
